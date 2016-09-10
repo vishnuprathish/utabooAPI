@@ -1,24 +1,25 @@
 package utabooapi;
-import com.sun.net.httpserver.HttpServer;
-import com.sun.jersey.api.container.httpserver.HttpServerFactory;
-import java.io.IOException;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 /**
  * Hello world!
  *
  */
+@Path("/hello")
 public class App 
 {
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Produces("text/plain")
-    public String getClichedMessage() {
-        // Return some cliched textual content
-        return "Hello World";
+    @Path("/{param}")
+    public Response getMsg(@PathParam("param") String msg) {
+
+        String output = "Jersey say : " + msg;
+
+        return Response.status(200).entity(output).build();
+
     }
 
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
 }
